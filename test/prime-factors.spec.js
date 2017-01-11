@@ -45,5 +45,21 @@ define(function(require) {
     it('should return [2, 2, 5, 5] for 100', function () {
       expect(primeFactors(100)).to.eql([2, 2, 5, 5]);
     });
+
+    it('should return an array', function () {
+      expect(primeFactors(100)).to.be.an('array');
+    });
+
+    it('should only accept positive numbers', function () {
+        expect(primeFactors.bind(primeFactors, 1.4)).to.throw(Error);
+    });
+
+    it('should only accept integers', function () {
+      expect(primeFactors.bind(primeFactors, -10)).to.throw(Error);
+    });
+
+    it('should only accept a parameter of type "number"', function () {
+      expect(primeFactors.bind(primeFactors, 'string')).to.throw(TypeError);
+    });
   });
 })
