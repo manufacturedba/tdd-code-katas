@@ -15,10 +15,18 @@ Object.keys(window.__karma__.files).forEach(function(file) {
 require.config({
   // Karma serves files under /base, which is the basePath from your config file
   baseUrl: '/base',
-
+  paths: {
+    ency: 'src/ency',
+    squire: 'node_modules/squirejs/src/Squire'
+  },
   // dynamically load all test files
   deps: allTestFiles,
 
   // we have to kickoff jasmine, as it is asynchronous
-  callback: window.__karma__.start
+  callback: function() {
+    if (!window.__karma__.launched) {
+      window.__karma__.start();
+      window.__karma__.launched = true;
+    }
+  }
 });
